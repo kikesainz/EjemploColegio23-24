@@ -10,5 +10,7 @@ import com.kike.colegio.dtos.AlumnoDTO;
 public interface AlumnosDAO {
 	
 	public List<AlumnoDTO> obtenerTodosAlumnos() throws ClassNotFoundException, SQLException, NamingException;
+	
+	public List<AlumnoDTO> buscarAlumnos(String id, String nombre, String apellido, String activo, String famNumerosa)throws ClassNotFoundException, SQLException, NamingException;
 
 }
