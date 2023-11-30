@@ -13,5 +13,9 @@ public interface IAlumnosService {
 	
 	public List<AlumnoDTO> buscarAlumnos(String id, String nombre, String apellido, String activo, String famNume) throws ClassNotFoundException, SQLException, NamingException;
 
+	public Integer insertarAlumno(String id, String nombre,String apellido, String activo, String famNumerosa, String municipio)throws ClassNotFoundException, SQLException, NamingException;
+	
+	public Integer actualizarAlumno(String id, String nombre,String apellido, String activo, String famNumerosa, String municipio)throws ClassNotFoundException, SQLException, NamingException;
+
 
 }

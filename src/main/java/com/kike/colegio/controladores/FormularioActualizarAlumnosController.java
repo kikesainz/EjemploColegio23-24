@@ -19,14 +19,14 @@ import com.kike.colegio.dtos.AlumnoDTO;
 import com.kike.colegio.dtos.ComboDTO;
 import com.kike.colegio.negocio.impl.AlumnosService;
 
-@WebServlet("/alumnos/insertaralumnos")
-public class InsertarAlumnosController extends HttpServlet {
+@WebServlet("/alumnos/formularioactualizaralumno")
+public class FormularioActualizarAlumnosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertarAlumnosController() {
+    public FormularioActualizarAlumnosController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,16 @@ public class InsertarAlumnosController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Recuperamos el combo municipios
+		// TODO Auto-generated method stub
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/actualizarAlumnos.jsp");
+		d.forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Recuperación combo
 		List<ComboDTO> listaMunicipios = new ArrayList<>();
 		ICombosDAO combosMunicipios = new CombosDAOImpl();
 		try {
@@ -44,19 +53,12 @@ public class InsertarAlumnosController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		request.setAttribute("comboMunicipios", listaMunicipios);
 		
-		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/insertarAlumnos.jsp");
-		d.forward(request, response);
+		//Fin recuperación combo
 		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer resultado = 0;
+		List<AlumnoDTO> listadoAlumnos = new ArrayList<>();	
+		
 		String id = request.getParameter("id");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
@@ -64,20 +66,22 @@ public class InsertarAlumnosController extends HttpServlet {
 		String activo = request.getParameter("activo");
 		String famNumerosa = request.getParameter("famNumerosa");
 		
-		String municipios = request.getParameter("municipios");
-		
 		activo = (activo != null) ? "1" : "0";
 		famNumerosa = (famNumerosa != null) ? "1":"0";
+		
+		AlumnosService alumnosService = new AlumnosService();
 		try {
-			resultado = new AlumnosService().insertarAlumno(id, nombre, apellido, activo, famNumerosa, municipios);
+			listadoAlumnos = alumnosService.buscarAlumnos(id, nombre, apellido, activo, famNumerosa);
 		} catch (ClassNotFoundException | SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("resultado", resultado);
+		request.setAttribute("lista", listadoAlumnos);
 		
-		doGet(request, response);
+		RequestDispatcher d = getServletContext().getRequestDispatcher("/WEB-INF/vistas/actualizarAlumnos.jsp");
+		d.forward(request, response);
+		
 	}
 
 }

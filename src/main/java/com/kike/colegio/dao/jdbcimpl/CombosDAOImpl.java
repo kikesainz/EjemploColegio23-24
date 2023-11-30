@@ -25,10 +25,11 @@ public class CombosDAOImpl implements ICombosDAO{
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 		
+	
 		while(rs.next()) {
 			listaMunicipios.add(new ComboDTO(rs.getInt(1), rs.getString(2)));
 		}
-		
+		connection.close();
 		
 		return listaMunicipios;
 	}

@@ -23,4 +23,18 @@ public class AlumnosService implements IAlumnosService{
 		return new AlumnosDAOImplJdbc().buscarAlumnos(id, nombre, apellido,  activo, famNumerosa);
 	}
 
+	@Override
+	public Integer insertarAlumno(String id, String nombre, String apellido, String activo, String famNumerosa,
+			String municipio) throws ClassNotFoundException, SQLException, NamingException {
+		// TODO Auto-generated method stub
+		return new AlumnosDAOImplJdbc().insertarAlumno(id, nombre, apellido, activo, famNumerosa, municipio);
+	}
+
+	@Override
+	public Integer actualizarAlumno(String id, String nombre, String apellido, String activo, String famNumerosa,
+			String municipio) throws ClassNotFoundException, SQLException, NamingException {
+		// TODO Auto-generated method stub
+		return new AlumnosDAOImplJdbc().actualizarAlumno(id, nombre, apellido, activo, famNumerosa, municipio);
+	}
+
 }

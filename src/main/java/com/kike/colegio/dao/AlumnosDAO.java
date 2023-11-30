@@ -13,4 +13,7 @@ public interface AlumnosDAO {
 	
 	public List<AlumnoDTO> buscarAlumnos(String id, String nombre, String apellido, String activo, String famNumerosa)throws ClassNotFoundException, SQLException, NamingException;
 
+	public Integer insertarAlumno(String id, String nombre,String apellido, String activo, String famNumerosa, String municipio)throws ClassNotFoundException, SQLException, NamingException;
+	
+	public Integer actualizarAlumno(String id, String nombre,String apellido, String activo, String famNumerosa, String municipio)throws ClassNotFoundException, SQLException, NamingException;
 }
